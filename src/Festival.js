@@ -15,7 +15,7 @@ export default function Festival() {
   let navigate = useNavigate();
   useEffect(() => {
     let token = localStorage.getItem("token");
-    if (!token) navigate("/home");
+    if (!token) navigate("/");
     fetchArtists(token);
     fetchUserData(token);
     // eslint-disable-next-line

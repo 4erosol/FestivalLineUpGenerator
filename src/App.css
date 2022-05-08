@@ -95,3 +95,36 @@ body {
   background-color: #0c9374;
   color: white;
 }
+
+@media (max-width: 830px) {
+  .main-container {
+    width: 350px;
+    height: 500px;
+  }
+  .inner-container {
+    width: 310px;
+    height: 400px;
+  }
+  .contents {
+    width: 270px;
+    height: 305px;
+    justify-content: center;
+  }
+  .title {
+    font-size: 28px;
+    line-height: 32px;
+  }
+  .login-button {
+    width: 200px;
+    height: 40px;
+    font-size: 18px;
+    white-space: nowrap;
+    padding-bottom: 28px;
+  }
+
+  .inner-container span {
+    font-size: 10px;
+    letter-spacing: 2px;
+    font-weight: 300;
+  }
+}
