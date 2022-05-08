@@ -1,8 +1,13 @@
 import "./index.css";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Buffer } from "buffer";
+import { useRef } from "react";
+import { exportAsImage } from "./exportAsImage";
+
 const CLIENT_ID = process.env.REACT_APP_CLIENT_ID;
 const CLIENT_SECRET = process.env.REACT_APP_CLIENT_SECRET;
+
 export default function Festival() {
   const [artists, useArtists] = useState("");
   const [name, useName] = useState("");
@@ -21,7 +26,7 @@ export default function Festival() {
       // eslint-disable-next-line
       if (!userToken) throw "No token available";
       const url =
-        "https://api.spotify.com/v1/me/top/artists?limit=20&time_range=long_term";
+        "https://api.spotify.com/v1/me/top/artists?limit=25&time_range=long_term";
       const req = await fetch(url, {
         headers: {
           // prettier-ignore
@@ -29,7 +34,6 @@ export default function Festival() {
           "Content-Type": "application/json",
         },
       });
-      console.log(req.status);
 
       // eslint-disable-next-line
       if (req.status === 401) {
@@ -37,12 +41,15 @@ export default function Festival() {
         if (newToken) {
           fetchArtists(newToken);
         }
+        return;
       }
-      const result = await req.json();
 
-      const artistsNames = result.items.map((item) => item.name);
-      // eslint-disable-next-line react-hooks/rules-of-hooks
-      useArtists(artistsNames);
+      const result = await req.json();
+      if (result["items"]) {
+        const artistsNames = result.items.map((item) => item.name);
+        // eslint-disable-next-line react-hooks/rules-of-hooks
+        useArtists(artistsNames);
+      }
     } catch (e) {
       console.error(e);
     }
@@ -97,48 +104,66 @@ export default function Festival() {
       const json = await req.json();
       if (json["access_token"]) {
         localStorage.setItem("token", json["access_token"]);
-        localStorage.setItem("refreshToken", json["refresh_token"]);
+
         return json["access_token"];
       }
     } catch (e) {
       console.error(e);
     }
   }
-  function displayArtists(artistsArray) {
-    return <p>{[...artistsArray].slice(2, artistsArray.lenght).join(" · ")}</p>;
+  function DisplayArtists(props) {
+    return [...props.artistsArray].slice(2).map((item, idx) => {
+      if (idx === props.artistsArray.length - 3) {
+        return <span key={`${item}${idx}`}>{item}</span>;
+      } else {
+        return <span key={`${item}${idx}`}>{item}·</span>;
+      }
+    });
   }
 
-  function displayHeadliners(artistsArray) {
-    const artistsFeatured = [...artistsArray].slice(0, 2);
-    return <h1>{artistsFeatured.join(" · ")}</h1>;
+  function DisplayHeadliners(props) {
+    return <h1>{[...props.artistsArray].slice(0, 2).join(" · ")}</h1>;
   }
-  console.log(name);
 
-  {artistsArray.map(artists) => { return (<span> artists </span>) } };
-
+  const exportRef = useRef();
   return (
-    <section className="poster-container">
-      <div className="festival-title">
-        <h1>
-          {name}'S <br />
-          FEST
-        </h1>
+    <section className="primary-container">
+      <div className="poster-container" id="poster-container" ref={exportRef}>
+        <div className="festival-title">
+          <h1>
+            {name}'S <br />
+            FEST
+          </h1>
+        </div>
+        <div className="date-location">
+          <span>10 11 12</span>
+          <span>DEC 2022</span>
+          <span> {country}</span>
+        </div>
+        <div className="headliners">
+          <DisplayHeadliners artistsArray={artists} />
+        </div>
+        <div className="space-line" />
+        <div className="down-arrow">
+          <i className="fa-solid fa-arrow-down" />
+        </div>
+        <div className="artist-list">
+          <DisplayArtists artistsArray={artists} />
+        </div>
+        <div className="footer">
+          <span>{name}</span>
+          <span>BY 4EROSOL | GET YOURS AT LINEUPFEST.HEROKUAPP.COM</span>
+        </div>
       </div>
-      <div className="date-location">
-        <span>10 11 12</span>
-        <span>DEC 2022</span>
-        <span> {country}</span>
-      </div>
-      <div className="headliners">{displayHeadliners(artists)}</div>
-      <div className="space-line" />
-      <div className="down-arrow">
-        <i className="fa-solid fa-arrow-down" />
-      </div>
-      <div className="artist-list">{displayArtists(artists)}</div>
-      <div className="footer">
-        <span>{name}</span>
-        <span>BY 4EROSOL | GET YOURS AT LINEUPFEST.HEROKUAPP.COM</span>
-      </div>
+      <button
+        className="download-button"
+        id="download-button"
+        type="button"
+        onClick={() => exportAsImage(exportRef.current, name)}
+      >
+        {" "}
+        DOWNLOAD IMAGE{" "}
+      </button>
     </section>
   );
 }
