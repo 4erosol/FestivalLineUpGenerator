@@ -5,7 +5,7 @@ import { Buffer } from "buffer";
 
 export default function Home() {
   const CLIENT_ID = process.env.REACT_APP_CLIENT_ID;
-  const REDIRECT_URI = "http://localhost:3000/home";
+  const REDIRECT_URI = "https://lineupfest.herokuapp.com/";
   const AUTH_ENDPOINT = "https://accounts.spotify.com/authorize";
   const RESPONSE_TYPE = "code";
   const SCOPE = "user-read-private user-top-read";
