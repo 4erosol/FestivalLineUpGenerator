@@ -11,12 +11,23 @@ body {
   font-family: "Inconsolata", monospace;
 }
 
+.general-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+  margin-top: 28px;
+}
+
 .primary-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   flex-wrap: wrap;
   justify-content: flex-start;
+  opacity: 0;
+  transition: all 0.5s ease;
 }
 
 .download-button {
@@ -84,7 +95,7 @@ body {
   margin-bottom: 12px;
   display: flex;
   align-items: flex-end;
-  justify-content: center;
+  justify-content: space-evenly;
   text-align: center;
 }
 .space-line {
@@ -103,17 +114,24 @@ body {
   font-size: 40px;
 }
 .artist-list {
-  margin-top: 18px;
+  display: flex;
+  margin-top: 24px;
   grid-area: 6 / 1 / 12 / 6;
-  font-size: 22px;
+  font-size: 28px;
   letter-spacing: 3px;
-  font-weight: bold;
+  font-weight: 500;
   text-transform: uppercase;
-  display: grid;
+  text-align: justify;
+  align-content: space-around;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  /* display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(10, 1fr);
-  text-align: center;
+  grid-template-rows: repeat(8, 1fr);
+  
   align-items: center;
+  grid-row-gap: 4px;
+  grid-column-gap: 8px; */
 }
 
 .footer {
@@ -128,7 +146,7 @@ body {
   letter-spacing: 2px;
 }
 
-.artist-list span:nth-child(1) {
+/* .artist-list span:nth-child(1) {
   grid-area: 1 / 1 / 2 / 2;
 }
 .artist-list span:nth-child(2) {
@@ -192,18 +210,8 @@ body {
   grid-area: 7 / 3 / 8 / 4;
 }
 .artist-list span:nth-child(22) {
-  grid-area: 8 / 1 / 9 / 2;
-}
-
-.artist-list span:nth-child(23) {
   grid-area: 8 / 2 / 9 / 3;
-}
-.artist-list span:nth-child(24) {
-  grid-area: 8 / 3 / 9 / 4;
-}
-.artist-list span:nth-child(25) {
-  grid-area: 9 / 2 / 10 / 3;
-}
+} */
 
 @media (max-width: 800px) {
   .poster-container {

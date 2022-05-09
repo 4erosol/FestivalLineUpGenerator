@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { Buffer } from "buffer";
 import { useRef } from "react";
 import { exportAsImage } from "./exportAsImage";
+import ScaleLoader from "react-spinners/ScaleLoader";
 
 const CLIENT_ID = process.env.REACT_APP_CLIENT_ID;
 const CLIENT_SECRET = process.env.REACT_APP_CLIENT_SECRET;
@@ -26,7 +27,7 @@ export default function Festival() {
       // eslint-disable-next-line
       if (!userToken) throw "No token available";
       const url =
-        "https://api.spotify.com/v1/me/top/artists?limit=25&time_range=long_term";
+        "https://api.spotify.com/v1/me/top/artists?limit=24&time_range=long_term";
       const req = await fetch(url, {
         headers: {
           // prettier-ignore
@@ -116,7 +117,7 @@ export default function Festival() {
       if (idx === props.artistsArray.length - 3) {
         return <span key={`${item}${idx}`}>{item}</span>;
       } else {
-        return <span key={`${item}${idx}`}>{item}·</span>;
+        return <span key={`${item}${idx}`}>{item}⠀</span>;
       }
     });
   }
@@ -126,44 +127,69 @@ export default function Festival() {
   }
 
   const exportRef = useRef();
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const [loading, setLoading] = useState(false);
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  useEffect(() => {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    }, 2000);
+  }, []);
+
+  setTimeout(() => {
+    const primaryContainer = document.getElementById("primary-container");
+    primaryContainer.style.opacity = 1;
+  }, 2000);
+
   return (
-    <section className="primary-container">
-      <div className="poster-container" id="poster-container" ref={exportRef}>
-        <div className="festival-title">
-          <h1>
-            {name}'S <br />
-            FEST
-          </h1>
-        </div>
-        <div className="date-location">
-          <span>10 11 12</span>
-          <span>DEC 2022</span>
-          <span> {country}</span>
-        </div>
-        <div className="headliners">
-          <DisplayHeadliners artistsArray={artists} />
-        </div>
-        <div className="space-line" />
-        <div className="down-arrow">
-          <i className="fa-solid fa-arrow-down" />
-        </div>
-        <div className="artist-list">
-          <DisplayArtists artistsArray={artists} />
-        </div>
-        <div className="footer">
-          <span>{name}</span>
-          <span>BY 4EROSOL | GET YOURS AT LINEUPFEST.HEROKUAPP.COM</span>
-        </div>
-      </div>
-      <button
-        className="download-button"
-        id="download-button"
-        type="button"
-        onClick={() => exportAsImage(exportRef.current, name)}
-      >
-        {" "}
-        DOWNLOAD IMAGE{" "}
-      </button>
-    </section>
+    <div className="general-container">
+      {loading ? (
+        <ScaleLoader color={"#0c9374"} loading={loading} size={200} />
+      ) : (
+        <section id="primary-container" className="primary-container">
+          <div
+            className="poster-container"
+            id="poster-container"
+            ref={exportRef}
+          >
+            <div className="festival-title">
+              <h1>
+                {name}'S <br />
+                FEST
+              </h1>
+            </div>
+            <div className="date-location">
+              <span>10 11 12</span>
+              <span>DEC 2022</span>
+              <span> {country}</span>
+            </div>
+            <div className="headliners">
+              <DisplayHeadliners artistsArray={artists} />
+            </div>
+            <div className="space-line" />
+            <div className="down-arrow">
+              <i className="fa-solid fa-arrow-down" />
+            </div>
+            <div className="artist-list">
+              <DisplayArtists artistsArray={artists} />
+            </div>
+            <div className="footer">
+              <span>{name}</span>
+              <span>BY 4EROSOL | GET YOURS AT LINEUPFEST.HEROKUAPP.COM</span>
+            </div>
+          </div>
+          <button
+            className="download-button"
+            id="download-button"
+            type="button"
+            onClick={() => exportAsImage(exportRef.current, name)}
+          >
+            {" "}
+            DOWNLOAD IMAGE{" "}
+          </button>
+        </section>
+      )}
+    </div>
   );
 }

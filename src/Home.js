@@ -5,7 +5,8 @@ import { Buffer } from "buffer";
 
 export default function Home() {
   const CLIENT_ID = process.env.REACT_APP_CLIENT_ID;
-  const REDIRECT_URI = "https://lineupfest.herokuapp.com/";
+  // const REDIRECT_URI = "https://lineupfest.herokuapp.com/";
+  const REDIRECT_URI = "http://localhost:3000/";
   const AUTH_ENDPOINT = "https://accounts.spotify.com/authorize";
   const RESPONSE_TYPE = "code";
   const SCOPE = "user-read-private user-top-read";
@@ -66,8 +67,14 @@ export default function Home() {
   function redirect() {
     window.location.href = `${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=${RESPONSE_TYPE}&scope=${SCOPE}`;
   }
+
+  setTimeout(() => {
+    const mainContainer = document.getElementById("main-container");
+    mainContainer.style.opacity = 1;
+  }, 100);
+
   return (
-    <section className="main-container">
+    <section id="main-container" className="main-container">
       <div className="inner-container">
         <div className="contents">
           <h1 className="title">
