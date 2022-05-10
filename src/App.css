@@ -74,7 +74,8 @@ body {
 }
 
 .login-button {
-  width: 250px;
+  display: flex;
+  width: 260px;
   height: 50px;
   background-color: white;
   color: #0c9374;
@@ -95,6 +96,18 @@ body {
 
 .login-button:hover {
   background-color: #0c9374;
+  color: white;
+}
+
+.login-button .spotify-logo {
+  font-size: 32px;
+  color: #1ed760;
+  margin-left: 10px;
+  align-self: center;
+  transition: all 0.3s ease;
+}
+
+.login-button:hover .spotify-logo {
   color: white;
 }
 
