@@ -91,7 +91,7 @@ export default function Home() {
             onClick={redirect}
           >
             Log in with Spotify
-            <i class="fa-brands fa-spotify spotify-logo"></i>
+            <i className="fa-brands fa-spotify spotify-logo"></i>
           </button>
         </div>
         <span>made by 4erosol | 2022</span>
