@@ -131,11 +131,15 @@ body {
     line-height: 32px;
   }
   .login-button {
-    width: 200px;
+    width: 240px;
     height: 40px;
     font-size: 18px;
     white-space: nowrap;
     padding-bottom: 28px;
+  }
+
+  .login-button .spotify-logo {
+    margin-top: 15px;
   }
 
   .inner-container span {
