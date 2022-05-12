@@ -78,8 +78,8 @@ body {
   width: 260px;
   height: 50px;
   background-color: white;
-  color: #0c9374;
-  border: 2px solid #0c9374;
+  color: black;
+  border: 2px solid #1d8954;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 5px;
   text-decoration: none;
@@ -92,23 +92,20 @@ body {
   font-family: "Inconsolata";
   font-weight: 700;
   line-height: 21px;
+  align-items: center;
 }
 
 .login-button:hover {
-  background-color: #0c9374;
+  border: 2px solid #1d8954;
   color: white;
+  background-color: black;
 }
 
-.login-button .spotify-logo {
-  font-size: 32px;
-  color: #1ed760;
+.login-button .spotify-icon img {
+  width: 32px;
+  height: 32px;
   margin-left: 10px;
-  align-self: center;
-  transition: all 0.3s ease;
-}
-
-.login-button:hover .spotify-logo {
-  color: white;
+  margin-top: 4px;
 }
 
 @media (max-width: 830px) {
@@ -136,10 +133,12 @@ body {
     font-size: 18px;
     white-space: nowrap;
     padding-bottom: 28px;
+    align-items: normal;
   }
 
-  .login-button .spotify-logo {
-    margin-top: 15px;
+  .login-button .spotify-icon img {
+    position: absolute;
+    top: 72%;
   }
 
   .inner-container span {

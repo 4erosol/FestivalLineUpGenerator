@@ -90,8 +90,13 @@ export default function Home() {
             type="button"
             onClick={redirect}
           >
-            Log in with Spotify
-            <i className="fa-brands fa-spotify spotify-logo"></i>
+            Log in with Spotify{" "}
+            <span className="spotify-icon">
+              <img
+                src="https://i.ibb.co/LdzdMhK/Spotify-Icon-RGB-Green.png"
+                alt="spotify-icon"
+              />
+            </span>
           </button>
         </div>
         <span>made by 4erosol | 2022</span>

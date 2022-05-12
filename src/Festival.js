@@ -188,6 +188,16 @@ export default function Festival() {
             {" "}
             DOWNLOAD IMAGE{" "}
           </button>
+          <span className="info-by">
+            {" "}
+            Data provided by{" "}
+            <span className="spotify-logo">
+              <img
+                src="https://i.ibb.co/164z2Jb/Spotify-Logo-RGB-Green.png"
+                alt="spotify-logo"
+              />
+            </span>{" "}
+          </span>
         </section>
       )}
     </div>
