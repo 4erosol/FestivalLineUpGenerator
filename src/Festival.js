@@ -175,6 +175,16 @@ export default function Festival() {
               <DisplayArtists artistsArray={artists} />
             </div>
             <div className="footer">
+              <span className="info-by">
+                {" "}
+                Data provided by{" "}
+                <span className="spotify-logo">
+                  <img
+                    src="https://i.ibb.co/164z2Jb/Spotify-Logo-RGB-Green.png"
+                    alt="spotify-logo"
+                  />
+                </span>{" "}
+              </span>
               <span>{name}</span>
               <span>BY 4EROSOL | GET YOURS AT LINEUPFEST.HEROKUAPP.COM</span>
             </div>
@@ -188,16 +198,6 @@ export default function Festival() {
             {" "}
             DOWNLOAD IMAGE{" "}
           </button>
-          <span className="info-by">
-            {" "}
-            Data provided by{" "}
-            <span className="spotify-logo">
-              <img
-                src="https://i.ibb.co/164z2Jb/Spotify-Logo-RGB-Green.png"
-                alt="spotify-logo"
-              />
-            </span>{" "}
-          </span>
         </section>
       )}
     </div>

@@ -16,7 +16,7 @@ body {
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 90vh;
+  height: 110vh;
   margin-top: 28px;
 }
 
@@ -60,12 +60,13 @@ body {
   background-repeat: no-repeat;
   color: white;
   width: 600px;
-  height: 850px;
+  height: 920px;
   padding: 20px;
+  padding-bottom: 8px;
   user-select: none;
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  grid-template-rows: repeat(12, 1fr);
+  grid-template-rows: repeat(10, 1fr);
   grid-column-gap: 0px;
   grid-row-gap: 0px;
 }
@@ -138,22 +139,28 @@ body {
   grid-area: 12 / 3 / 13 / 6;
   display: flex;
   justify-content: flex-end;
-  text-align: right;
-  align-items: flex-end;
+  margin-top: 32px;
+  align-items: center;
   white-space: nowrap;
   flex-direction: column;
   font-weight: 400;
   letter-spacing: 2px;
+  flex-wrap: wrap;
+  align-content: flex-end;
+  margin-right: 22px;
 }
 
 .info-by {
+  grid-area: 12 / 1 / 13 / 3;
+  background-color: black;
+  border-radius: 8px;
   color: white;
-  width: 270px;
-  height: 30px;
+  width: 230px;
+  height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 12px;
+  margin: 8px;
   flex-wrap: nowrap;
   font-size: 10px;
   letter-spacing: 2px;
