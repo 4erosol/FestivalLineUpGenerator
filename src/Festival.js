@@ -27,7 +27,7 @@ export default function Festival() {
       // eslint-disable-next-line
       if (!userToken) throw "No token available";
       const url =
-        "https://api.spotify.com/v1/me/top/artists?limit=24&time_range=long_term";
+        "https://api.spotify.com/v1/me/top/artists?limit=24&time_range=medium_term";
       const req = await fetch(url, {
         headers: {
           // prettier-ignore
@@ -114,7 +114,7 @@ export default function Festival() {
   }
   function DisplayArtists(props) {
     return [...props.artistsArray].slice(2).map((item, idx) => {
-      if (idx === props.artistsArray.length - 3) {
+      if (idx === props.artistsArray.length - 2) {
         return <span key={`${item}${idx}`}>{item}</span>;
       } else {
         return <span key={`${item}${idx}`}>{item}⠀</span>;
