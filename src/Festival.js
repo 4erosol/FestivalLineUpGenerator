@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import "./posterpage.css";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -5,18 +6,22 @@ import { Buffer } from "buffer";
 import { useRef } from "react";
 import { exportAsImage } from "./exportAsImage";
 import ScaleLoader from "react-spinners/ScaleLoader";
+import choosePic from "./bkgrdSelector";
+
 const CLIENT_ID = process.env.REACT_APP_CLIENT_ID;
 const CLIENT_SECRET = process.env.REACT_APP_CLIENT_SECRET;
 export default function Festival() {
   const [artists, useArtists] = useState("");
   const [name, useName] = useState("");
   const [country, useCountry] = useState("");
+  const [bgImage, useBgImage] = useState("");
   let navigate = useNavigate();
   useEffect(() => {
     let token = localStorage.getItem("token");
     if (!token) navigate("/");
     fetchArtists(token);
     fetchUserData(token);
+    useBgImage(choosePic());
     // eslint-disable-next-line
   }, []);
   const fetchArtists = async (userToken) => {
@@ -130,7 +135,9 @@ export default function Festival() {
   setTimeout(() => {
     const primaryContainer = document.getElementById("primary-container");
     primaryContainer.style.opacity = 1;
+    // eslint-disable-next-line react-hooks/rules-of-hooks
   }, 2000);
+
   return (
     <div className="general-container">
       {" "}
@@ -142,6 +149,7 @@ export default function Festival() {
           <div
             className="poster-container"
             id="poster-container"
+            style={{ backgroundImage: `url(${bgImage})` }}
             ref={exportRef}
           >
             {" "}
@@ -178,15 +186,26 @@ export default function Festival() {
               <span> BY 4EROSOL | GET YOURS AT LINEUPFEST.HEROKUAPP.COM </span>{" "}
             </div>{" "}
           </div>{" "}
-          <button
-            className="download-button"
-            id="download-button"
-            type="button"
-            onClick={() => exportAsImage(exportRef.current, name)}
-          >
-            {" "}
-            DOWNLOAD IMAGE{" "}
-          </button>{" "}
+          <div className="buttons">
+            <button
+              className="download-button"
+              id="download-button"
+              type="button"
+              onClick={() => exportAsImage(exportRef.current, name)}
+            >
+              {" "}
+              DOWNLOAD IMAGE{" "}
+            </button>
+            <button
+              className="reload-button"
+              id="reload-button"
+              type="button"
+              onClick={() => useBgImage(choosePic())}
+            >
+              {" "}
+              CHANGE BACKGROUND{" "}
+            </button>{" "}
+          </div>
           <span className="info-by">
             {" "}
             Data provided by{" "}

@@ -1,4 +1,5 @@
 import html2canvas from "html2canvas";
+// eslint-disable-next-line
 const element = document.getElementById("poster-container");
 
 export const exportAsImage = async (element, imageFileName) => {

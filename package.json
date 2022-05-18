@@ -10,6 +10,7 @@
     "html2canvas": "^1.4.1",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
+    "react-inspector": "^5.1.1",
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
     "react-spinners": "^0.11.0",

@@ -16,6 +16,8 @@ body {
   width: 880px;
   height: 600px;
   background-image: url("../assets/test-background-1.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
   border-radius: 5px;
   margin: 0;
   position: absolute;
@@ -105,13 +107,14 @@ body {
   .main-container {
     width: 350px;
     height: 500px;
-    background-image: url("../assets/test-background-mbl.jpg");
+    background-image: url("../assets/test-background-1.jpg");
   }
   .inner-container {
     width: 310px;
     height: 400px;
   }
   .contents {
+    display: inline-grid;
     width: 270px;
     height: 305px;
     justify-content: center;
