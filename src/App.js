@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Routes, Route } from "react-router-dom";
-import "./App.css";
+import "./home.css";
 import Festival from "./Festival";
 import Home from "./Home";
 

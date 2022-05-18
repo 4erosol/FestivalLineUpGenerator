@@ -1,14 +1,12 @@
-import "./index.css";
+import "./posterpage.css";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Buffer } from "buffer";
 import { useRef } from "react";
 import { exportAsImage } from "./exportAsImage";
 import ScaleLoader from "react-spinners/ScaleLoader";
-
 const CLIENT_ID = process.env.REACT_APP_CLIENT_ID;
 const CLIENT_SECRET = process.env.REACT_APP_CLIENT_SECRET;
-
 export default function Festival() {
   const [artists, useArtists] = useState("");
   const [name, useName] = useState("");
@@ -21,7 +19,6 @@ export default function Festival() {
     fetchUserData(token);
     // eslint-disable-next-line
   }, []);
-
   const fetchArtists = async (userToken) => {
     try {
       // eslint-disable-next-line
@@ -31,11 +28,10 @@ export default function Festival() {
       const req = await fetch(url, {
         headers: {
           // prettier-ignore
-          "Authorization":`Bearer ${userToken}`,
+          "Authorization": `Bearer ${userToken}`,
           "Content-Type": "application/json",
         },
       });
-
       // eslint-disable-next-line
       if (req.status === 401) {
         const newToken = await refreshToken();
@@ -44,7 +40,6 @@ export default function Festival() {
         }
         return;
       }
-
       const result = await req.json();
       if (result["items"]) {
         const artistsNames = result.items.map((item) => item.name);
@@ -62,7 +57,7 @@ export default function Festival() {
         method: "GET",
         headers: {
           // prettier-ignore
-          "Authorization":`Bearer ${userToken}`,
+          "Authorization": `Bearer ${userToken}`,
           "Content-Type": "application/json",
         },
       });
@@ -82,7 +77,6 @@ export default function Festival() {
         grant_type: "refresh_token",
         refresh_token: refresh,
       };
-
       let formBody = [];
       for (let property in details) {
         let encodedKey = encodeURIComponent(property);
@@ -90,10 +84,8 @@ export default function Festival() {
         formBody.push(encodedKey + "=" + encodedValue);
       }
       formBody = formBody.join("&");
-
       const req = await fetch("https://accounts.spotify.com/api/token", {
         method: "POST",
-
         headers: {
           "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
           Authorization:
@@ -105,27 +97,26 @@ export default function Festival() {
       const json = await req.json();
       if (json["access_token"]) {
         localStorage.setItem("token", json["access_token"]);
-
         return json["access_token"];
       }
     } catch (e) {
       console.error(e);
     }
   }
+
   function DisplayArtists(props) {
     return [...props.artistsArray].slice(2).map((item, idx) => {
       if (idx === props.artistsArray.length - 2) {
-        return <span key={`${item}${idx}`}>{item}</span>;
+        return <span key={`${item}${idx}`}> {item} </span>;
       } else {
-        return <span key={`${item}${idx}`}>{item}⠀</span>;
+        return <span key={`${item}${idx}`}> {item}⠀ </span>;
       }
     });
   }
 
   function DisplayHeadliners(props) {
-    return <h1>{[...props.artistsArray].slice(0, 2).join(" · ")}</h1>;
+    return <h1> {[...props.artistsArray].slice(0, 2).join(" · ")} </h1>;
   }
-
   const exportRef = useRef();
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const [loading, setLoading] = useState(false);
@@ -136,49 +127,57 @@ export default function Festival() {
       setLoading(false);
     }, 2000);
   }, []);
-
   setTimeout(() => {
     const primaryContainer = document.getElementById("primary-container");
     primaryContainer.style.opacity = 1;
   }, 2000);
-
   return (
     <div className="general-container">
+      {" "}
       {loading ? (
         <ScaleLoader color={"#0c9374"} loading={loading} size={200} />
       ) : (
         <section id="primary-container" className="primary-container">
+          {" "}
           <div
             className="poster-container"
             id="poster-container"
             ref={exportRef}
           >
+            {" "}
             <div className="festival-title">
+              {" "}
               <h1>
-                {name}'S <br />
-                FEST
-              </h1>
-            </div>
+                {" "}
+                {name}
+                'S <br />
+                FEST{" "}
+              </h1>{" "}
+            </div>{" "}
             <div className="date-location">
-              <span>10 11 12</span>
-              <span>DEC 2022</span>
-              <span> {country}</span>
-            </div>
+              {" "}
+              <span> 10 11 12 </span> <span> DEC 2022 </span>{" "}
+              <span> {country} </span>{" "}
+            </div>{" "}
             <div className="headliners">
-              <DisplayHeadliners artistsArray={artists} />
-            </div>
-            <div className="space-line" />
+              {" "}
+              <DisplayHeadliners artistsArray={artists} />{" "}
+            </div>{" "}
+            <div className="space-line" />{" "}
             <div className="down-arrow">
-              <i className="fa-solid fa-arrow-down" />
-            </div>
+              {" "}
+              <i className="fa-solid fa-angles-down" />{" "}
+            </div>{" "}
             <div className="artist-list">
-              <DisplayArtists artistsArray={artists} />
-            </div>
+              {" "}
+              <DisplayArtists artistsArray={artists} />{" "}
+            </div>{" "}
             <div className="footer">
-              <span>{name}</span>
-              <span>BY 4EROSOL | GET YOURS AT LINEUPFEST.HEROKUAPP.COM</span>
-            </div>
-          </div>
+              {" "}
+              <span> {name} </span>{" "}
+              <span> BY 4EROSOL | GET YOURS AT LINEUPFEST.HEROKUAPP.COM </span>{" "}
+            </div>{" "}
+          </div>{" "}
           <button
             className="download-button"
             id="download-button"
@@ -187,19 +186,20 @@ export default function Festival() {
           >
             {" "}
             DOWNLOAD IMAGE{" "}
-          </button>
+          </button>{" "}
           <span className="info-by">
             {" "}
             Data provided by{" "}
             <span className="spotify-logo">
+              {" "}
               <img
                 src="https://i.ibb.co/164z2Jb/Spotify-Logo-RGB-Green.png"
                 alt="spotify-logo"
-              />
+              />{" "}
             </span>{" "}
-          </span>
+          </span>{" "}
         </section>
-      )}
+      )}{" "}
     </div>
   );
 }
