@@ -8,6 +8,7 @@
     "@testing-library/user-event": "^13.5.0",
     "buffer": "^6.0.3",
     "html2canvas": "^1.4.1",
+    "node-sass": "^7.0.1",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
     "react-inspector": "^5.1.1",

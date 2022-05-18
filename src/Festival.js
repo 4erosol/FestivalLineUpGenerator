@@ -1,5 +1,5 @@
-/* eslint-disable react-hooks/rules-of-hooks */
-import "./posterpage.css";
+/* eslint-disable */
+import "./posterpage.scss";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Buffer } from "buffer";
@@ -22,7 +22,6 @@ export default function Festival() {
     fetchArtists(token);
     fetchUserData(token);
     useBgImage(choosePic());
-    // eslint-disable-next-line
   }, []);
   const fetchArtists = async (userToken) => {
     try {
@@ -123,9 +122,9 @@ export default function Festival() {
     return <h1> {[...props.artistsArray].slice(0, 2).join(" · ")} </h1>;
   }
   const exportRef = useRef();
-  // eslint-disable-next-line react-hooks/rules-of-hooks
+
   const [loading, setLoading] = useState(false);
-  // eslint-disable-next-line react-hooks/rules-of-hooks
+
   useEffect(() => {
     setLoading(true);
     setTimeout(() => {
@@ -135,7 +134,6 @@ export default function Festival() {
   setTimeout(() => {
     const primaryContainer = document.getElementById("primary-container");
     primaryContainer.style.opacity = 1;
-    // eslint-disable-next-line react-hooks/rules-of-hooks
   }, 2000);
 
   return (
