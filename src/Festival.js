@@ -5,9 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { Buffer } from "buffer";
 import { useRef } from "react";
 import { exportAsImage } from "./exportAsImage";
-import ScaleLoader from "react-spinners/ScaleLoader";
 import choosePic from "./bkgrdSelector";
-
 const CLIENT_ID = process.env.REACT_APP_CLIENT_ID;
 const CLIENT_SECRET = process.env.REACT_APP_CLIENT_SECRET;
 export default function Festival() {
@@ -16,6 +14,7 @@ export default function Festival() {
   const [country, useCountry] = useState("");
   const [bgImage, useBgImage] = useState("");
   let navigate = useNavigate();
+
   useEffect(() => {
     let token = localStorage.getItem("token");
     if (!token) navigate("/");
@@ -123,100 +122,95 @@ export default function Festival() {
   }
   const exportRef = useRef();
 
-  const [loading, setLoading] = useState(false);
+  // const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-    }, 2000);
-  }, []);
-  setTimeout(() => {
-    const primaryContainer = document.getElementById("primary-container");
-    primaryContainer.style.opacity = 1;
-  }, 2000);
+  // // useEffect(() => {
+  // //   setLoading(true);
+  // //   setTimeout(() => {
+  // //     setLoading(false);
+  // //   }, 2000);
+  // // }, []);
+  // // setTimeout(() => {
+  // //   const primaryContainer = document.getElementById("primary-container");
+  // //   primaryContainer.style.opacity = 1;
+  // // }, 2000);
 
   return (
     <div className="general-container">
-      {" "}
-      {loading ? (
-        <ScaleLoader color={"#0c9374"} loading={loading} size={200} />
-      ) : (
-        <section id="primary-container" className="primary-container">
+      <section id="primary-container" className="primary-container">
+        {" "}
+        <div
+          className="poster-container"
+          id="poster-container"
+          style={{ backgroundImage: `url(${bgImage})` }}
+          ref={exportRef}
+        >
           {" "}
-          <div
-            className="poster-container"
-            id="poster-container"
-            style={{ backgroundImage: `url(${bgImage})` }}
-            ref={exportRef}
+          <div className="festival-title">
+            {" "}
+            <h1>
+              {" "}
+              {name}
+              'S <br />
+              FEST{" "}
+            </h1>{" "}
+          </div>{" "}
+          <div className="date-location">
+            {" "}
+            <span> 10 11 12 </span> <span> DEC 2022 </span>{" "}
+            <span> {country} </span>{" "}
+          </div>{" "}
+          <div className="headliners">
+            {" "}
+            <DisplayHeadliners artistsArray={artists} />{" "}
+          </div>{" "}
+          <div className="space-line" />{" "}
+          <div className="down-arrow">
+            {" "}
+            <i className="fa-solid fa-angles-down" />{" "}
+          </div>{" "}
+          <div className="artist-list">
+            {" "}
+            <DisplayArtists artistsArray={artists} />{" "}
+          </div>{" "}
+          <div className="footer">
+            {" "}
+            <span> {name} </span>{" "}
+            <span> BY 4EROSOL | GET YOURS AT LINEUPFEST.HEROKUAPP.COM </span>{" "}
+          </div>{" "}
+        </div>{" "}
+        <div className="buttons">
+          <button
+            className="download-button"
+            id="download-button"
+            type="button"
+            onClick={() => exportAsImage(exportRef.current, name)}
           >
             {" "}
-            <div className="festival-title">
-              {" "}
-              <h1>
-                {" "}
-                {name}
-                'S <br />
-                FEST{" "}
-              </h1>{" "}
-            </div>{" "}
-            <div className="date-location">
-              {" "}
-              <span> 10 11 12 </span> <span> DEC 2022 </span>{" "}
-              <span> {country} </span>{" "}
-            </div>{" "}
-            <div className="headliners">
-              {" "}
-              <DisplayHeadliners artistsArray={artists} />{" "}
-            </div>{" "}
-            <div className="space-line" />{" "}
-            <div className="down-arrow">
-              {" "}
-              <i className="fa-solid fa-angles-down" />{" "}
-            </div>{" "}
-            <div className="artist-list">
-              {" "}
-              <DisplayArtists artistsArray={artists} />{" "}
-            </div>{" "}
-            <div className="footer">
-              {" "}
-              <span> {name} </span>{" "}
-              <span> BY 4EROSOL | GET YOURS AT LINEUPFEST.HEROKUAPP.COM </span>{" "}
-            </div>{" "}
-          </div>{" "}
-          <div className="buttons">
-            <button
-              className="download-button"
-              id="download-button"
-              type="button"
-              onClick={() => exportAsImage(exportRef.current, name)}
-            >
-              {" "}
-              DOWNLOAD IMAGE{" "}
-            </button>
-            <button
-              className="reload-button"
-              id="reload-button"
-              type="button"
-              onClick={() => useBgImage(choosePic())}
-            >
-              {" "}
-              CHANGE BACKGROUND{" "}
-            </button>{" "}
-          </div>
-          <span className="info-by">
+            DOWNLOAD IMAGE{" "}
+          </button>
+          <button
+            className="reload-button"
+            id="reload-button"
+            type="button"
+            onClick={() => useBgImage(choosePic())}
+          >
             {" "}
-            Data provided by{" "}
-            <span className="spotify-logo">
-              {" "}
-              <img
-                src="https://i.ibb.co/164z2Jb/Spotify-Logo-RGB-Green.png"
-                alt="spotify-logo"
-              />{" "}
-            </span>{" "}
+            CHANGE BACKGROUND{" "}
+          </button>{" "}
+        </div>
+        <span className="info-by">
+          {" "}
+          Data provided by{" "}
+          <span className="spotify-logo">
+            {" "}
+            <img
+              src="https://i.ibb.co/164z2Jb/Spotify-Logo-RGB-Green.png"
+              alt="spotify-logo"
+            />{" "}
           </span>{" "}
-        </section>
-      )}{" "}
+        </span>{" "}
+      </section>
     </div>
   );
 }

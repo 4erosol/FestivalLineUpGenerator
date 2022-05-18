@@ -1,3 +1,4 @@
+/* eslint-disable */
 import "./home.css";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
@@ -19,7 +20,6 @@ export default function Home() {
     if (!token && code) {
       exchangeCodeForToken(code);
     }
-    // eslint-disable-next-line
   }, []);
   async function exchangeCodeForToken(code) {
     try {
@@ -59,10 +59,6 @@ export default function Home() {
   function redirect() {
     window.location.href = `${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=${RESPONSE_TYPE}&scope=${SCOPE}`;
   }
-  setTimeout(() => {
-    const mainContainer = document.getElementById("main-container");
-    mainContainer.style.opacity = 1;
-  }, 100);
   return (
     <section id="main-container" className="main-container">
       {" "}
