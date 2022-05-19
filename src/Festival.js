@@ -24,7 +24,6 @@ export default function Festival() {
   }, []);
   const fetchArtists = async (userToken) => {
     try {
-      // eslint-disable-next-line
       if (!userToken) throw "No token available";
       const url =
         "https://api.spotify.com/v1/me/top/artists?limit=24&time_range=medium_term";
@@ -35,7 +34,7 @@ export default function Festival() {
           "Content-Type": "application/json",
         },
       });
-      // eslint-disable-next-line
+
       if (req.status === 401) {
         const newToken = await refreshToken();
         if (newToken) {
@@ -46,7 +45,7 @@ export default function Festival() {
       const result = await req.json();
       if (result["items"]) {
         const artistsNames = result.items.map((item) => item.name);
-        // eslint-disable-next-line react-hooks/rules-of-hooks
+
         useArtists(artistsNames);
       }
     } catch (e) {
@@ -66,9 +65,8 @@ export default function Festival() {
       });
       const json = await req.json();
       if (json["display_name"]) {
-        // eslint-disable-next-line react-hooks/rules-of-hooks
         useName(json["display_name"]);
-        // eslint-disable-next-line react-hooks/rules-of-hooks
+
         useCountry(json["country"]);
       }
     } catch (e) {}
@@ -120,20 +118,8 @@ export default function Festival() {
   function DisplayHeadliners(props) {
     return <h1> {[...props.artistsArray].slice(0, 2).join(" · ")} </h1>;
   }
+
   const exportRef = useRef();
-
-  // const [loading, setLoading] = useState(false);
-
-  // // useEffect(() => {
-  // //   setLoading(true);
-  // //   setTimeout(() => {
-  // //     setLoading(false);
-  // //   }, 2000);
-  // // }, []);
-  // // setTimeout(() => {
-  // //   const primaryContainer = document.getElementById("primary-container");
-  // //   primaryContainer.style.opacity = 1;
-  // // }, 2000);
 
   return (
     <div className="general-container">
