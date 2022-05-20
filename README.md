@@ -2,7 +2,9 @@
 
 ## _Generate a festival poster out a user's top artists on Spotify_
 
-Web aplication built using React and CSS.
+Web aplication built using React and SCSS.
+
+Try it in [this website](http://lineupfest.herokuapp.com/).
 
 ## Running the app locally
 
