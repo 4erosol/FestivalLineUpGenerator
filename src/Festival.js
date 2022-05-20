@@ -26,7 +26,7 @@ export default function Festival() {
     try {
       if (!userToken) throw "No token available";
       const url =
-        "https://api.spotify.com/v1/me/top/artists?limit=24&time_range=long_term";
+        "https://api.spotify.com/v1/me/top/artists?limit=24&time_range=medium_term";
       const req = await fetch(url, {
         headers: {
           // prettier-ignore
